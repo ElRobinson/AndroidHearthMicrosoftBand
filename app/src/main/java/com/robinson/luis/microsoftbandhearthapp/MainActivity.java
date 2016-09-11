@@ -15,6 +15,7 @@ import com.microsoft.band.BandInfo;
 import com.microsoft.band.BandIOException;
 import com.microsoft.band.ConnectionState;
 import com.microsoft.band.UserConsent;
+
 import com.microsoft.band.sensors.BandHeartRateEvent;
 import com.microsoft.band.sensors.BandHeartRateEventListener;
 import com.microsoft.band.sensors.HeartRateConsentListener;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         if (client == null) {
             BandInfo[] devices = BandClientManager.getInstance().getPairedBands();
             if (devices.length == 0) {
-                appendToUI("Band isn't paired with your phone.\n");
+                appendToUI("Band não está pareada!\n");
                 return false;
             }
             client = BandClientManager.getInstance().create(getBaseContext(), devices[0]);
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        appendToUI("Band is connecting...\n");
+        appendToUI("Conectando\n");
         return ConnectionState.CONNECTED == client.connect().await();
     }
 
@@ -134,8 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     if (client.getSensorManager().getCurrentHeartRateConsent() == UserConsent.GRANTED) {
                         client.getSensorManager().registerHeartRateEventListener(mHeartRateEventListener);
                     } else {
-                        appendToUI("You have not given this application consent to access heart rate data yet."
-                                + " Please press the Heart Rate Consent button.\n");
+                        appendToUI("Aplicação sem acesso!\n");
                     }
                 } else {
                     appendToUI("Band isn't connected. Please make sure bluetooth is on and the band is in range.\n");
