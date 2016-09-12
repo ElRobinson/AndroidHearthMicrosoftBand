@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBandHeartRateChanged(final BandHeartRateEvent event) {
             if (event != null) {
-                appendToUI(String.format("Heart Rate = %d beats per minute\n"
-                        + "Quality = %s\n", event.getHeartRate(), event.getQuality()));
+                appendToUI(String.format("Batimentos  = %d batimentos por minutos\n"
+                        + "Status = %s\n", event.getHeartRate(), event.getQuality()));
             }
         }
     };
@@ -138,13 +138,13 @@ public class MainActivity extends AppCompatActivity {
                         appendToUI("Aplicação sem acesso!\n");
                     }
                 } else {
-                    appendToUI("Band isn't connected. Please make sure bluetooth is on and the band is in range.\n");
+                    appendToUI("Band não está conectada no bluetooth.\n");
                 }
             } catch (BandException e) {
                 String exceptionMessage="";
                 switch (e.getErrorType()) {
                     case UNSUPPORTED_SDK_VERSION_ERROR:
-                        exceptionMessage = "Microsoft Health BandService doesn't support your SDK Version. Please update to latest SDK.\n";
+                        exceptionMessage = "SDK muito baixo\n";
                         break;
                     case SERVICE_ERROR:
                         exceptionMessage = "Microsoft Health BandService is not available. Please make sure Microsoft Health is installed and that you have the correct permissions.\n";
